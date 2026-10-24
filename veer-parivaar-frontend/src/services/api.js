@@ -3,6 +3,8 @@
  * Handles JWT authentication headers, response normalization, and error handling.
  */
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
+
 async function request(endpoint, options = {}) {
   const token = localStorage.getItem('token')
   const headers = {
@@ -21,7 +23,7 @@ async function request(endpoint, options = {}) {
 
   let response
   try {
-    response = await fetch(endpoint, {
+    response = await fetch(`${API_BASE_URL}${endpoint}`, {
       ...options,
       headers,
     })
